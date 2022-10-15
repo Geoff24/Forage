@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
 
 
 import Navigation from './Routes/Navigation';
@@ -9,18 +9,15 @@ import Navigation from './Routes/Navigation';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      
-      
+    <View style={styles.container}>
       <Navigation/>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({ // TODO fix style
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    
+    backgroundColor: 'white',
   },
 });
