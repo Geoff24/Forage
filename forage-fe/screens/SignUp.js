@@ -54,7 +54,7 @@ const styles = StyleSheet.create({ // TODO fix style
     logo: {
         width: 363,
         height: 254,
-        top: -30
+        top: -10
     },
     text: {
         color: 'blue'
