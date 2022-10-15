@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import AnimatedSplash from "react-native-animated-splash-screen";
+import { useNavigation } from "@react-navigation/native";
 
 const SplashScreen = () => {
   const [loading, setLoading] = useState(false);
-
+  const navigation = useNavigation();
+  
   setTimeout(() => {
     setLoading(true);
+    navigation.navigate("LogIn")
   }, 2000);
 
   return (
@@ -19,15 +22,12 @@ const SplashScreen = () => {
       logoHeight={500}
       logoWidth={500}
     >
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      
     </AnimatedSplash>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TODO fix style
   container: {
     flex: 1,
     backgroundColor: '#fff',

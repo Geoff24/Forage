@@ -1,30 +1,25 @@
+
+// TODO copy of ForgotPasswordScreen. Yet to be implemented
+
+
 import React, {useState} from 'react'
 import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native'
 import Logo from '../assets/icon.png' // TODO change logo
 import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
-import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [emailId, setemailId] = useState('');
+    
 
     const {height} = useWindowDimensions();
-    const navigation = useNavigation();
 
-    const onLoginPressed = () => {
-        // TODO validate User
-        console.warn("log in");
+    const onResetPasswordPressed = () => {
+        console.warn("reset password");
     }
 
-    const onForgotPasswordPressed = () => {
-        // TODO add feature
-        navigation.navigate("ForgotPassword");
-    }
-
-    const onSignUpPressed = () => {
-        // TODO add feature
-        navigation.navigate("SignUp");
+    const onBacktoSignInPressed = () => {
+        console.warn("back to sign in");
     }
 
     return (
@@ -34,13 +29,12 @@ const LoginScreen = () => {
                 style={[styles.logo, {height: height * 0.3}]} 
                 resizeMode = "contain" />
 
-                <CustomInput placeholder="Username" value={username} setValue={setUsername}/>
-                <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry/>
+                <CustomInput placeholder="Enter Email ID" value={emailId} setValue={setemailId}/>
+                
 
-                <CustomButton text="Log in" onPress={onLoginPressed}/>
+                <CustomButton text="Reset Password" onPress={onResetPasswordPressed}/>
 
-                <Text style={styles.text} onPress={onSignUpPressed}>Don't have an account? Sign up</Text>
-                <Text style={styles.text} onPress={onForgotPasswordPressed}>Forgot Password?</Text>
+                <Text style={styles.text} onPress={onBacktoSignInPressed}>Back to Sign in</Text>
                 
             </View>
         </ScrollView>

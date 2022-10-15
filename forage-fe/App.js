@@ -1,22 +1,26 @@
+import React from 'react';
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 
-import SplashScreen from './Screen/SplashScreen';
+
+import Navigation from './src/Navigation/Navigation';
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       
-      <SplashScreen/>
-    </View>
+      
+      <Navigation/>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TODO fix style
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    
   },
 });
