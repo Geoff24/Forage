@@ -5,17 +5,22 @@ import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import {useForm, Controller} from 'react-hook-form';
+import { TextInput } from 'react-native-gesture-handler'
 
 const LoginScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [password, setPassword] = useState('');
 
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
-    const onLoginPressed = () => {
+    const {control, handleSubmit, formState: {errors}} = useForm();
+
+    const onLoginPressed = (data) => {
         // TODO validate User
-        navigation.navigate("Scanner")
+        console.log(data);
+        // navigation.navigate("Scanner")
         console.warn("log in");
     }
 
@@ -35,10 +40,11 @@ const LoginScreen = () => {
             style={styles.logo} 
             resizeMode = "contain" />
 
-            <CustomInput placeholder="Username" value={username} setValue={setUsername} />
-            <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry/>
+            <CustomInput name="Username" placeholder="Username" control={control} rules={{required: "Username is required"}} />
+            <CustomInput name="Password" placeholder="Password" control={control} rules={{required: "Password is required"}} secureTextEntry/>
+            
 
-            <CustomButton text="Log in" onPress={onLoginPressed}/>
+            <CustomButton text="Log in" onPress={handleSubmit(onLoginPressed)}/>
 
             <Text style={styles.text} onPress={onSignUpPressed}>Don't have an account? Sign up</Text>
             <Text style={styles.text} onPress={onForgotPasswordPressed}>Forgot Password?</Text>
