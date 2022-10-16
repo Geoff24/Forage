@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner'
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
 
 function Scanner() {
+  const barcodeLookupApiKey = 'xn1rxlhdit2ce7yfxd3yvtne7ah1tf';
+  const [loading, setLoading] = useState(true);
+
+
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false)
-  const [text, setText] = useState('Not yet scanned')
+  const [title, setTitle] = useState('Not yet scanned')
+  const [image, setImage] = useState(null)
 
   // Request Camera Permission
   const askForCameraPermission = () => {
@@ -15,7 +20,6 @@ function Scanner() {
     })()
   }
 
-  // Request Camera Permission
   useEffect(() => {
     askForCameraPermission();
   }, []);
@@ -24,9 +28,21 @@ function Scanner() {
   // Barcode is scanned
   const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
-    setText(data);
+
+    fetch('https://api.barcodelookup.com/v3/products?barcode=' + data + '&formatted=y&key=' + barcodeLookupApiKey)
+    .then((response) => response.json() )
+    .then((json) => {
+      console.log(json.products[0].images[0])
+      setTitle(json.products[0].title)
+      setImage(json.products[0].images[0])
+    })
+    .catch((error) => setLoading(false))
+
+
     console.log('Type: ' + type + '\nData: ' + data);
   }
+
+  // Retrieve ingredient based on barcode
 
   // Check Permission and return screens
   if (hasPermission === null) {
@@ -36,7 +52,7 @@ function Scanner() {
       </View>
     )
   }
-  
+
   if (hasPermission === false) {
     return (
       <View>
@@ -54,7 +70,11 @@ function Scanner() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={{ height: 400, width: 400 }} />
     </View>
-    <Text style={styles.maintext}>{text}</Text>
+    <Text style={styles.maintext}>{title}</Text>
+    <Image
+      style={{width: 100, height: 100}}
+      source={{uri: image}}
+    />
 
     {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
   </View>
@@ -82,5 +102,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato'
   }
 });
+
 
 export default Scanner
