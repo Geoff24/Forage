@@ -102,15 +102,14 @@ function Scanner() {
                 source={{uri: image}}
               />
               <Text style={styles.maintext}>{title}</Text>
+
+              {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
             </BottomSheetView>
         </BottomSheet>
 
       </BarCodeScanner>
 
     </View>
-    
-
-    {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
   </View>
   )
 }
