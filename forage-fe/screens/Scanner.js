@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import CustomButton from '../src/CustomButton/CustomButton';
 
 function Scanner() {
+  // TODO: Make API key secret
   const barcodeLookupApiKey = 'xn1rxlhdit2ce7yfxd3yvtne7ah1tf';
   const [loading, setLoading] = useState(true);
 
@@ -11,6 +14,10 @@ function Scanner() {
   const [scanned, setScanned] = useState(false)
   const [title, setTitle] = useState('Not yet scanned')
   const [image, setImage] = useState(null)
+
+  const sheetRef = useRef(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const snapPoints = ["50%", "95%"]
 
   // Request Camera Permission
   const askForCameraPermission = () => {
@@ -24,10 +31,17 @@ function Scanner() {
     askForCameraPermission();
   }, []);
 
+  // When done is clicked
+  const onDonePressed = () => {
+  // TODO: Implement done
+  }
 
   // Barcode is scanned
   const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
+
+    sheetRef.current?.snapToIndex(0)
+    setIsOpen(true)
 
     fetch('https://api.barcodelookup.com/v3/products?barcode=' + data + '&formatted=y&key=' + barcodeLookupApiKey)
     .then((response) => response.json() )
@@ -37,7 +51,6 @@ function Scanner() {
       setImage(json.products[0].images[0])
     })
     .catch((error) => setLoading(false))
-
 
     console.log('Type: ' + type + '\nData: ' + data);
   }
@@ -65,23 +78,37 @@ function Scanner() {
   // Return scanner
   return (
     <View style={styles.container}>
-    <View style={styles.barcodebox}>
+      <View style={styles.barcodebox}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ height: '100%', width: '100%' }}>
+          <Image
+            style={[styles.scanImage, {opacity: isOpen ? 0 : 1}]}
+            source={{uri: 'https://i.stack.imgur.com/VVqSa.png'}}
+          /> 
 
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={{ height: '100%', width: '100%' }}>
-        <Image
-          style={styles.scanImage}
-          source={{uri: 'https://i.stack.imgur.com/VVqSa.png'}}
-        /> 
+          <CustomButton text="Done" onPress={onDonePressed}/>
+
+          <BottomSheet
+            ref={sheetRef}
+            snapPoints={snapPoints}
+            enablePanDownToClose={true}
+            index={-1}
+            onClose={() => setIsOpen(false)}
+          >
+            <BottomSheetView style={styles.sheetStyle}>
+              <Image
+                style={{width: 100, height: 100}}
+                source={{uri: image}}
+              />
+              <Text style={styles.maintext}>{title}</Text>
+            </BottomSheetView>
+        </BottomSheet>
+
       </BarCodeScanner>
 
     </View>
-    <Text style={styles.maintext}>{title}</Text>
-    <Image
-      style={{width: 100, height: 100}}
-      source={{uri: image}}
-    />
+    
 
     {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
   </View>
@@ -96,6 +123,7 @@ const styles = StyleSheet.create({
   maintext: {
     fontSize: 16,
     margin: 20,
+    top: 20
   },
   scanImage: {
     width: '100%',
@@ -109,6 +137,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato'
+  },
+  sheetStyle: {
+    flexDirection:'row'
   }
 });
 

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({ // TODO fix style
     },
 
     text: {
-        fontFamily: 'Alata400_Regular',
+        // fontFamily: 'Alata400_Regular',
         fontWeight: 'bold',
         color: 'white',
         fontSize: 30,
