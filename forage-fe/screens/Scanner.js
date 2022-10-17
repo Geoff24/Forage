@@ -68,11 +68,11 @@ function Scanner() {
     <View style={styles.barcodebox}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={{ height: 400, width: 400 }} />
+        style={{ height: '100%', width: '100%' }} />
     </View>
     <Text style={styles.maintext}>{title}</Text>
     <Image
-      style={{width: 100, height: 100}}
+      // style={{width: 100, height: 100}}
       source={{uri: image}}
     />
 
@@ -85,8 +85,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   maintext: {
     fontSize: 16,
@@ -95,8 +93,8 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 300,
-    width: 300,
+    height: '100%',
+    width: '100%',
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato'
