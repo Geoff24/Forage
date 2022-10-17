@@ -53,6 +53,8 @@ function Scanner() {
     .catch((error) => setLoading(false))
 
     console.log('Type: ' + type + '\nData: ' + data);
+
+    setScanned(false)
   }
 
   // Retrieve ingredient based on barcode
@@ -103,7 +105,6 @@ function Scanner() {
               />
               <Text style={styles.maintext}>{title}</Text>
 
-              {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
             </BottomSheetView>
         </BottomSheet>
 
@@ -135,7 +136,6 @@ const styles = StyleSheet.create({
     width: '100%',
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
   },
   sheetStyle: {
     flexDirection:'row'

@@ -20,7 +20,7 @@ const LoginScreen = () => {
     const onLoginPressed = (data) => {
         // TODO validate User
         console.log(data);
-        // navigation.navigate("Scanner")
+        navigation.navigate("Scanner")
         console.warn("log in");
     }
 
