@@ -4,18 +4,19 @@ import Logo from '../assets/forage-white-logo.png' // TODO change logo
 import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
+import {useForm, Controller} from 'react-hook-form'
 
 const SignupScreen = () => {
-    const [fullname, setfullname] = useState('');
-    const [emailId, setemailId] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmpassword, setconfirmpassword] = useState('');
-
+    
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
-    const onSignupPressed = () => {
+    const {control, handleSubmit, formState: {errors}, watch} = useForm();
+    const pwd = watch('password')
+
+    const onSignupPressed = (data) => {
         // TODO add sign up
+        console.log(data)
         console.warn("sign up")
 
     }
@@ -24,18 +25,19 @@ const SignupScreen = () => {
         navigation.navigate("LogIn")
     }
 
+    const email_regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/ // TODO find better regex string
     return (
         <View style={styles.root}>
             <Image source = {Logo} 
             style={[styles.logo, {height: height * 0.3}]} 
             resizeMode = "contain" />
 
-            <CustomInput placeholder="Full name" value={fullname} setValue={setfullname}/>
-            <CustomInput placeholder="Email ID" value={emailId} setValue={setemailId}/>
-            <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry/>
-            <CustomInput placeholder="Confirm Password" value={confirmpassword} setValue={setconfirmpassword} secureTextEntry/>
+            <CustomInput name="username" placeholder="Username" control={control} rules={{required: "Username is required"}} />
+            <CustomInput name="emailId" placeholder="Email" control={control} rules={{required: "Email is required", pattern: {value: email_regex, message: "Email address is invalid"}}}/>
+            <CustomInput name="password" placeholder="Password" control={control} secureTextEntry rules={{required: "Password is required"}}/>
+            <CustomInput name="confirmpassword" placeholder="Confirm Password" control={control} secureTextEntry rules={{validate: value => value === pwd || 'Password does not match' }}/>
 
-            <CustomButton text="Sign up" onPress={onSignupPressed}/>
+            <CustomButton text="Sign up" onPress={handleSubmit(onSignupPressed)}/>
 
             <Text style = {styles.text} onPress={onExistingAccountPressed}>Already have an account? Log in</Text>
             
