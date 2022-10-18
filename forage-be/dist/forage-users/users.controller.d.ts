@@ -7,5 +7,16 @@ export declare class UsersController {
             _id: import("mongoose").Types.ObjectId;
         };
     }>;
-    getAllUsers(): Promise<void>;
+    getAllUsers(): Promise<{
+        id: any;
+        username: string;
+        email: string;
+        password: string;
+    }[]>;
+    getUser(username: any): Promise<{
+        id: any;
+        username: string;
+        email: string;
+        password: string;
+    }>;
 }

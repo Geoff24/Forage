@@ -28,7 +28,18 @@ let UsersService = class UsersService {
     }
     async getUsers() {
         const users = await this.userModel.find();
-        console.log(users);
+        return users.map((user) => ({ id: user.id, username: user.username, email: user.email, password: user.password }));
+    }
+    async getSingleUser(username) {
+        const user = await this.findUser(username);
+        return user;
+    }
+    async findUser(username) {
+        const user = await this.userModel.findOne({ username: username });
+        if (!user) {
+            throw new common_1.NotFoundException('Could not find user.');
+        }
+        return { id: user.id, username: user.username, email: user.email, password: user.password };
     }
 };
 UsersService = __decorate([

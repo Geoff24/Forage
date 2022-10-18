@@ -30,5 +30,17 @@ export declare class UsersService {
     insertUser(email: string, username: string, password: string): Promise<import("mongoose").Document<unknown, any, User> & User & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getUsers(): Promise<void>;
+    getUsers(): Promise<{
+        id: any;
+        username: string;
+        email: string;
+        password: string;
+    }[]>;
+    getSingleUser(username: string): Promise<{
+        id: any;
+        username: string;
+        email: string;
+        password: string;
+    }>;
+    private findUser;
 }
