@@ -6,7 +6,7 @@ import CustomButton from '../src/CustomButton/CustomButton';
 
 function Scanner() {
   // TODO: Make API key secret
-  const barcodeLookupApiKey = 'xn1rxlhdit2ce7yfxd3yvtne7ah1tf';
+  const barcodeLookupApiKey = 'ogdtnacr5sik6wih46xogatvxophig';
   const [loading, setLoading] = useState(true);
 
 
@@ -23,7 +23,7 @@ function Scanner() {
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === 'granted' ? <Text /> : null);
     })()
   }
 
@@ -54,7 +54,7 @@ function Scanner() {
 
     console.log('Type: ' + type + '\nData: ' + data);
 
-    setScanned(false)
+    // setScanned(false)
   }
 
   // Retrieve ingredient based on barcode
@@ -70,7 +70,7 @@ function Scanner() {
 
   if (hasPermission === false) {
     return (
-      <View>
+      <View style={styles.barcodebox}>
         <Text>No access to camera</Text>;
         <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} /> 
       </View>
@@ -96,7 +96,10 @@ function Scanner() {
             snapPoints={snapPoints}
             enablePanDownToClose={true}
             index={-1}
-            onClose={() => setIsOpen(false)}
+            onClose={() => {
+              setIsOpen(false)
+              setScanned(false)
+            }}
           >
             <BottomSheetView style={styles.sheetStyle}>
               <Image
