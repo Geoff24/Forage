@@ -1,20 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
+import { CheckBox } from 'react-native-elements'
 
 const ScannedItem = ( {item} ) => {
+    const [checked, setChecked] = useState(true)
+
     return (
         <View style={styles.container}>
             <Image style={styles.image} source={{uri: item.images[0]}}/>
             <Text style={styles.maintext}>{item.title}</Text>
+            <View style={styles.checkBox}>
+                <CheckBox checked={checked} checkedColor='black' onPress={() => setChecked(!checked)}/>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    checkBox: {
+        transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
+        marginLeft: '5%'
+    },
+
     image: {
-        width: 80,
-        height: 80,
-        marginRight: 25
+        width: 70,
+        height: 70,
+        marginRight: '5%',
+        borderColor: 'orange',
+        borderWidth: 2,
+        borderRadius: 20
     },
 
     maintext: {
@@ -27,7 +41,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         padding: 5,
-        margin: 15,
+        padding: 15,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
         alignItems: 'center'

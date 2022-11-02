@@ -7,7 +7,7 @@ import ScannedItem from './ScannedItem';
 
 function BarcodeScanner() {
   // TODO: Make API key secret
-    const barcodeLookupApiKey = 'ogdtnacr5sik6wih46xogatvxophig';
+    const barcodeLookupApiKey = 'gr6910dgjog4bo34vd4u97rfhthrrf';
     const [loading, setLoading] = useState(true);
 
     const [hasPermission, setHasPermission] = useState(null);
@@ -47,6 +47,7 @@ function BarcodeScanner() {
         .then((response) => response.json() )
         .then((json) => {
             setScannedItems([...scannedItems, json.products[0]])
+            console.log(json.products[0])
         })
         .catch((error) => setLoading(false))
 
@@ -100,6 +101,7 @@ function BarcodeScanner() {
                         }}
                     >
                         <BottomSheetView style={styles.sheetStyle}>
+                            <Text style={styles.sheetTitle}>My Ingredients</Text>
                             <ScrollView>
                             {scannedItems.map((itemData) => (
                                 <ScannedItem item={itemData}/>
@@ -139,6 +141,13 @@ barcodebox: {
 },
 sheetStyle: {
     flex: 1
+},
+
+sheetTitle:{
+    padding: 5,
+    fontSize: 19,
+    fontWeight: 'bold',
+    textAlign:'center'
 }
 });
 
