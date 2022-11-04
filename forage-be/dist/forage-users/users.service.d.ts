@@ -22,25 +22,23 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
+import { HttpStatus } from '@nestjs/common';
 import { User } from './users.model';
 import { Model } from 'mongoose';
+import { JwtService } from '@nestjs/jwt';
 export declare class UsersService {
     private readonly userModel;
     constructor(userModel: Model<User>);
-    insertUser(email: string, username: string, password: string): Promise<import("mongoose").Document<unknown, any, User> & User & {
+    signup2(user: User): Promise<User>;
+    login(username: string, password: string, jwt: JwtService): Promise<any>;
+    signup(email: string, username: string, password: string): Promise<HttpStatus.OK | HttpStatus.UNAUTHORIZED>;
+    getUsers(): Promise<(import("mongoose").Document<unknown, any, User> & User & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
+    getSingleUser(username: string): Promise<import("mongoose").Document<unknown, any, User> & User & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getUsers(): Promise<{
-        id: any;
-        username: string;
-        email: string;
-        password: string;
-    }[]>;
-    getSingleUser(username: string): Promise<{
-        id: any;
-        username: string;
-        email: string;
-        password: string;
-    }>;
     private findUser;
+    updateUser(userid: any, username: any, email: any, password: any): Promise<void>;
+    deleteUser(username: any): Promise<void>;
 }

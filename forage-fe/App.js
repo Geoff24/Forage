@@ -4,13 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
 
 
-import Navigation from './Routes/Navigation';
-
+// import Navigation from './Routes/Navigation';
+import NavigationBar from './Routes/NavBar';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Navigation/>
+      <NavigationBar/>
     </View>
   );
 }

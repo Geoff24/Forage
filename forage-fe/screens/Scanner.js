@@ -6,7 +6,7 @@ import CustomButton from '../src/CustomButton/CustomButton';
 
 function Scanner() {
   // TODO: Make API key secret
-  const barcodeLookupApiKey = 'xn1rxlhdit2ce7yfxd3yvtne7ah1tf';
+  const barcodeLookupApiKey = 'ogdtnacr5sik6wih46xogatvxophig';
   const [loading, setLoading] = useState(true);
 
 
