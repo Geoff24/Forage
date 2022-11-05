@@ -63,6 +63,7 @@ const LoginScreen = () => {
             <Text style={styles.text} onPress={onScanNowPressed}>Scan Now</Text>
             <Text style={styles.text} onPress={onSignUpPressed}>Don't have an account? Sign up</Text>
             <Text style={styles.text} onPress={onForgotPasswordPressed}>Forgot Password?</Text>
+            
         </View>
     )
 }
