@@ -18,6 +18,7 @@ const LoginScreen = () => {
 
     const {control, handleSubmit, formState: {errors}} = useForm();
 
+
     const onLoginPressed = async (data) => {
         
         
@@ -30,6 +31,7 @@ const LoginScreen = () => {
         }
     
         
+
     }
 
     const onForgotPasswordPressed = () => {

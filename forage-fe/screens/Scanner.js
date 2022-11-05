@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+
 import CustomButton from '../src/CustomButton/CustomButton';
+import BarcodeScanner from '../src/ScannerComponents/BarcodeScanner';
 
 function Scanner() {
   // TODO: Make API key secret
@@ -75,42 +77,10 @@ function Scanner() {
     )
   }
 
+
   // Return scanner
   return (
-    <View style={styles.container}>
-      <View style={styles.barcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: '100%', width: '100%' }}>
-          <Image
-            style={[styles.scanImage, {opacity: isOpen ? 0 : 1}]}
-            source={{uri: 'https://i.stack.imgur.com/VVqSa.png'}}
-          /> 
-
-          <CustomButton text="Done" onPress={onDonePressed}/>
-
-          <BottomSheet
-            ref={sheetRef}
-            snapPoints={snapPoints}
-            enablePanDownToClose={true}
-            index={-1}
-            onClose={() => setIsOpen(false)}
-          >
-            <BottomSheetView style={styles.sheetStyle}>
-              <Image
-                style={{width: 100, height: 100}}
-                source={{uri: image}}
-              />
-              <Text style={styles.maintext}>{title}</Text>
-
-              {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
-            </BottomSheetView>
-        </BottomSheet>
-
-      </BarCodeScanner>
-
-    </View>
-  </View>
+    <BarcodeScanner />
   )
 }
 
@@ -135,7 +105,6 @@ const styles = StyleSheet.create({
     width: '100%',
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
   },
   sheetStyle: {
     flexDirection:'row'
