@@ -3,7 +3,8 @@ import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Entypo from 'react-native-vector-icons/Entypo'
 import SplashScreen from '../screens/Splash';
 import LoginScreen from "../screens/Login";
 import SignupScreen from '../screens/SignUp';
@@ -23,11 +24,51 @@ function ScannerStackScreen(){
         <Tab.Navigator 
         initialRouteName='Scanner'
         screenOptions={{headerShown: false}}>
-            <Tab.Screen name="Scanner" component={ScannerScreen} />
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Favorites" component={FavoritesScreen} />
-            <Tab.Screen name="Pantry" component={PantryScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Scanner" 
+            component={ScannerScreen} 
+            options={{
+                tabBarLabel: "Scanner",
+                tabBarIcon: ({color, size}) => (
+                    <Ionicons name="camera" color={color} size={size}/>
+                )
+            }}
+            />
+            <Tab.Screen name="Home" 
+            component={HomeScreen} 
+            options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: ({color, size}) => (
+                    <Ionicons name="home" color={color} size={size}/>
+                )
+            }}
+            />
+            <Tab.Screen name="Favorites" 
+            component={FavoritesScreen}
+            options={{
+                tabBarLabel: "Favorites",
+                tabBarIcon: ({color, size}) => (
+                    <Ionicons name="heart" color={color} size={size}/>
+                )
+            }}
+            />
+            <Tab.Screen name="Pantry" 
+            component={PantryScreen} 
+            options={{
+                tabBarLabel: "Pantry",
+                tabBarIcon:({color, size}) => (
+                    <Entypo name="shop" color={color} size={size}/>
+                )
+            }}
+            />
+            <Tab.Screen name="Profile" 
+            component={ProfileScreen} 
+            options={{
+                tabBarLabel: "Profile",
+                tabBarIcon:({color, size}) => (
+                    <Ionicons name="person" color={color} size={size}/>
+                )
+            }}
+            />
         </Tab.Navigator>
     )
 }
