@@ -10,7 +10,7 @@ const SplashScreen = () => {
   
   setTimeout(() => {
     setLoading(true);
-    navigation.navigate("Login")
+    navigation.navigate("LogIn")
   }, 2000);
 
   return (

@@ -12,14 +12,13 @@ const mongoose_1 = require("@nestjs/mongoose");
 const users_controller_1 = require("./users.controller");
 const users_model_1 = require("./users.model");
 const users_service_1 = require("./users.service");
-const jwt_1 = require("@nestjs/jwt");
 let UserModule = class UserModule {
 };
 UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: users_model_1.UserSchema }]), jwt_1.JwtModule],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: users_model_1.UserSchema }])],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService, jwt_1.JwtService]
+        providers: [users_service_1.UsersService]
     })
 ], UserModule);
 exports.UserModule = UserModule;

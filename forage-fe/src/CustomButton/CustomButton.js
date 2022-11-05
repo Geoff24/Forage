@@ -3,13 +3,13 @@ import { View, Text, StyleSheet,Pressable } from "react-native";
 import { useFonts, Alata_400Regular } from '@expo-google-fonts/alata';
 
 const CustomButton = ({onPress, text, type = "PRIMAEY"}) => {
-    useFonts({
-        Alata_400Regular
-    }); 
+    // useFonts({
+    //     Alata_400Regular
+    // }); 
     
     return (
         <Pressable onPress={onPress} style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
+            <Text style={styles.text}>{text}</Text>
         </Pressable>
     )
 }

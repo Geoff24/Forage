@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import axios from 'axios';
 import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native'
 import Logo from '../assets/forage-white-logo.png' // TODO change logo
 import CustomInput from '../src/CustomInput/CustomInput'
@@ -15,22 +14,18 @@ const SignupScreen = () => {
     const {control, handleSubmit, formState: {errors}, watch} = useForm();
     const pwd = watch('password')
 
-    const onSignupPressed = async (data) => {
-        
-        
-        const response = await axios.post("http://localhost:3000/users/signup", data);
-        console.log(response.data.code)
-        
-
-        console.log("saved")
+    const onSignupPressed = (data) => {
+        // TODO add sign up
+        console.log(data)
+        console.warn("sign up")
 
     }
 
     const onExistingAccountPressed = () => {
-        navigation.navigate("Login")
+        navigation.navigate("LogIn")
     }
 
-    const email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ // TODO find better regex string
+    const email_regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/ // TODO find better regex string
     return (
         <View style={styles.root}>
             <Image source = {Logo} 

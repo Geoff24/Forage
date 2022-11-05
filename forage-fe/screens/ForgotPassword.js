@@ -21,7 +21,7 @@ const LoginScreen = () => {
     }
 
     const onBacktoSignInPressed = () => {
-        navigation.navigate("Login")
+        navigation.navigate("LogIn")
     }
 
     const email_regex = /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/ // TODO find better regex string
