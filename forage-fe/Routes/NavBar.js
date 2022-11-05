@@ -24,15 +24,7 @@ function ScannerStackScreen(){
         <Tab.Navigator 
         initialRouteName='Scanner'
         screenOptions={{headerShown: false}}>
-            <Tab.Screen name="Scanner" 
-            component={ScannerScreen} 
-            options={{
-                tabBarLabel: "Scanner",
-                tabBarIcon: ({color, size}) => (
-                    <Ionicons name="camera" color={color} size={size}/>
-                )
-            }}
-            />
+            
             <Tab.Screen name="Home" 
             component={HomeScreen} 
             options={{
@@ -48,6 +40,15 @@ function ScannerStackScreen(){
                 tabBarLabel: "Favorites",
                 tabBarIcon: ({color, size}) => (
                     <Ionicons name="heart" color={color} size={size}/>
+                )
+            }}
+            />
+            <Tab.Screen name="Scanner" 
+            component={ScannerScreen} 
+            options={{
+                tabBarLabel: "Scanner",
+                tabBarIcon: ({color, size}) => (
+                    <Ionicons name="camera" color={color} size={size}/>
                 )
             }}
             />
