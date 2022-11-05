@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner'
-import { StyleSheet, View, Text, Button, ActivityIndicator, Image, ScrollView} from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator, Image, ScrollView, ImageBackground, Pressable} from 'react-native';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { useNavigation } from '@react-navigation/native'
 import CustomButton from '../CustomButton/CustomButton';
 import ScannedItem from './ScannedItem';
+import Navigation from '../../Routes/Navigation';
 
 function BarcodeScanner() {
+    const navigation = useNavigation();
+
   // TODO: Make API key secret
     const barcodeLookupApiKey = 'gr6910dgjog4bo34vd4u97rfhthrrf';
     const [loading, setLoading] = useState(true);
@@ -33,7 +37,7 @@ function BarcodeScanner() {
 
     // When done is clicked
     const onDonePressed = () => {
-        // TODO: Implement done
+        navigation.navigate('Recipes', {scannedItems})
     }
 
     // Barcode is scanned
@@ -83,12 +87,14 @@ function BarcodeScanner() {
                     style={{ height: '100%', width: '100%' }}
                 >
                     
-                    <Image
+                    <ImageBackground
                         style={[styles.scanImage, {opacity: isOpen ? 0 : 1}]}
                         source={{uri: 'https://i.stack.imgur.com/VVqSa.png'}}
-                    /> 
-
-                    <CustomButton text="Done" onPress={onDonePressed}/>
+                    >
+                        <Pressable onPress={onDonePressed} style={styles.done}>
+                            <Text style={styles.buttonText}>Done</Text>
+                        </Pressable>
+                    </ImageBackground>  
 
                     <BottomSheet
                         ref={sheetRef}
@@ -107,10 +113,8 @@ function BarcodeScanner() {
                                 <ScannedItem item={itemData}/>
                             ))}
                             </ScrollView>
-
                         </BottomSheetView>
                     </BottomSheet>
-
                 </BarCodeScanner>
             </View>
         </View>
@@ -118,37 +122,60 @@ function BarcodeScanner() {
 }
 
 const styles = StyleSheet.create({
-container: {
-    flex: 1,
-    backgroundColor: '#fff',
-},
-maintext: {
-    fontSize: 16,
-    margin: 20,
-    top: 20
-},
-scanImage: {
-    width: '100%',
-    height: '100%',
-},
-barcodebox: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-    overflow: 'hidden',
-    borderRadius: 30,
-},
-sheetStyle: {
-    flex: 1
-},
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    maintext: {
+        fontSize: 16,
+        margin: 20,
+        top: 20
+    },
+    scanImage: {
+        width: '100%',
+        height: '100%',
+    },
+    barcodebox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '102.5%',
+        width: '100%',
+        overflow: 'hidden',
+        borderRadius: 30,
+    },
+    
+    sheetStyle: {
+        flex: 1
+    },
 
-sheetTitle:{
-    padding: 5,
-    fontSize: 19,
-    fontWeight: 'bold',
-    textAlign:'center'
-}
+    sheetTitle:{
+        padding: 5,
+        fontSize: 19,
+        fontWeight: 'bold',
+        textAlign:'center'
+    },
+
+    done: {
+        backgroundColor: '#EB3737',
+        width: '22%',
+        height: '6%',
+        padding: 10,
+        marginVertical: 50,
+        alignItems: 'center',
+        borderRadius: 16,
+        top: '1%',
+        left: '75%',
+        borderColor: 'white',
+        borderWidth: 2
+    },
+
+    buttonText:{
+        fontWeight: 'bold',
+        color: 'white',
+        fontSize: 22,
+    }
+
+
 });
 
 

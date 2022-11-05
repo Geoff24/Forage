@@ -47,13 +47,13 @@ function ScannerStackScreen(){
             }}
             />
             <Tab.Screen name="Scanner" 
-            component={ScannerScreen} 
-            options={{
-                tabBarLabel: "Scanner",
-                tabBarIcon: ({color, size}) => (
-                    <Ionicons name="camera" color={color} size={size}/>
-                )
-            }}
+                component={ScannerScreen} 
+                options={{
+                    tabBarLabel: "Scanner",
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="camera" color={color} size={size}/>
+                    )
+                }}
             />
             <Tab.Screen name="Pantry" 
             component={PantryScreen} 
