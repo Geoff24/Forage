@@ -24,7 +24,7 @@ const LoginScreen = () => {
         
         const response = await axios.post("http://localhost:3000/users/login", data)
         if (response.data.code === 200){
-            navigation.navigate("Recipes")
+            navigation.navigate("Scanner")
         }
         else{
             //TODO figure out what happens if login fails
