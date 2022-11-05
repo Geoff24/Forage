@@ -12,13 +12,20 @@ const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const users_module_1 = require("./forage-users/users.module");
+const jwt_1 = require("@nestjs/jwt");
+const constants_1 = require("./constants");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UserModule, mongoose_1.MongooseModule.forRoot('mongodb+srv://loremipsum:forage123@cluster0.5rodjye.mongodb.net/forage?retryWrites=true&w=majority')],
+        imports: [users_module_1.UserModule, mongoose_1.MongooseModule.forRoot('mongodb+srv://loremipsum:forage123@cluster0.5rodjye.mongodb.net/forage?retryWrites=true&w=majority'),
+            jwt_1.JwtModule.register({
+                secret: constants_1.secret,
+                signOptions: { expiresIn: 60 }
+            }),
+        ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, jwt_1.JwtService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
