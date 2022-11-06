@@ -177,7 +177,7 @@ const samplerecipes = [
     const recipesUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey='
     
 
-    // causing code to app to crash for some reason
+    // causing app to crash for some reason
     // useEffect(() => {
     //     fetch(recipesUrl + recipeApiKey + "&ingredients=" + "chicken,flour&")
     //     .then((response) => response.json())
