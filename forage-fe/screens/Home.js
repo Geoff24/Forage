@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native'
 import Logo from '../assets/forage-white-logo.png'
 import CustomInput from '../src/CustomInput/CustomInput'
@@ -8,89 +8,12 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import {useForm, Controller} from 'react-hook-form';
 import { TextInput } from 'react-native-gesture-handler'
 import NavigationBar from '../Routes/NavBar'
+import RecipeItem from '../src/RecipeComponents/RecipeItem'
 
 
 const RecipesScreen = () => {
-    const [searchBarValue, setSearchBarValue] = useState('');
-    return (
-        <View>
-            <TextInput placeholder='Search' value={searchBarValue} onChangeText={setSearchBarValue} style={styles.searchBar}/>
-            {recipes.map((recipe, index) => (
-                <View key={index}>
-                    <Image style={styles.recipe_image} source={{uri: recipe.images}}/>
-                    <Text style={styles.recipe_title}>{recipe.title}</Text>
-                    <Text style={styles.recipe_info}>{recipe.likes}</Text>
-                </View>
-            ))}
-            
-        </View>
-    )
-}
-export default RecipesScreen;
-const styles = StyleSheet.create({
-    searchBar: {
-        flex:1,
-        flexDirection: "row",
-        alignItems: "center",
-        paddingTop: 8,
-        paddingRight: 12,
-        paddingBottom: 8,
-        paddingLeft: 0,
 
-        gap: 8,
-
-        position: "absolute",
-        width: 303,
-        height: 40,
-        left: 13,
-        top: 60,
-
-        background: '#FBFBFB',
-        borderWidth: "solid",
-        borderColor: "#EBEBEB",
-        borderRadius: 100
-    },
-    recipe_image: {
-        position: "absolute",
-        width: 91,
-        height: 73,
-        left: 16,
-        top: 189,
-    },
-    recipe_title: {
-        position: "absolute",
-        width: 196,
-        height: 28,
-        left: 120,
-        top: 194,
-
-        
-        fontStyle: 'normal',
-        fontWeight: 0,
-        fontSize: 22,
-        lineHeight: 30,
-        letterSpacing: 0.03,
-
-        color: '#000000'
-    },
-    recipe_info: {
-        position: "absolute",
-        width: 108,
-        height: 24,
-        left: 120,
-        top: 230,
-
-        
-        fontStyle: 'normal',
-        fontWeight: 0,
-        fontSize: 15,
-        lineHeight: 21,
-        letterSpacing: 0.03,
-
-        color: '#000000'
-    }
-})
-const recipes = [
+const samplerecipes = [
     {
         "id": 73420,
         "image": "https://spoonacular.com/recipeImages/73420-312x231.jpg",
@@ -246,3 +169,62 @@ const recipes = [
         "usedIngredients": []
     }
 ]
+    const [searchBarValue, setSearchBarValue] = useState('');
+    const [recipes, setRecipes] = useState(samplerecipes) //TODO change
+
+    // TODO: Make API key secret
+    const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
+    const recipesUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey='
+    
+
+    // causing code to app to crash for some reason
+    // useEffect(() => {
+    //     fetch(recipesUrl + recipeApiKey + "&ingredients=" + "chicken,flour&")
+    //     .then((response) => response.json())
+    //     .then((json) => {
+    //         setRecipes(json)
+    //         console.log(recipes)
+    //     })
+    //     .catch((error) => alert(error))
+    // }, [])    
+
+
+    
+    
+    return (
+        <View style={styles.container}>
+            <TextInput placeholder='Search' value={searchBarValue} onChangeText={setSearchBarValue} style={styles.searchBar}/>
+            <ScrollView style={styles.allRecipes}>
+                {recipes.map((recipe, index) => (
+                    <RecipeItem recipe={recipe} />
+                ))}
+            </ScrollView>
+        </View>
+    )
+}
+export default RecipesScreen;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor:'#FFF',
+    },
+
+    allRecipes: {
+        top: '10%',
+    },
+
+    searchBar: {
+        backgroundColor: '#FBFBFB',
+        top: '7%',
+        left:'2%',
+        width: '85%',
+        height: '5%',
+        paddingLeft: '5%',
+
+        borderWidth: 2,
+        borderColor: "#EBEBEB",
+        borderRadius: 100
+    },
+
+})
