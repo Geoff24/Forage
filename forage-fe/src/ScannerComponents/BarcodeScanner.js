@@ -51,11 +51,8 @@ function BarcodeScanner() {
         .then((response) => response.json() )
         .then((json) => {
             setScannedItems([...scannedItems, json.products[0]])
-            console.log(json.products[0])
         })
         .catch((error) => setLoading(false))
-
-        console.log('Type: ' + type + '\nData: ' + data);
     }
 
     // Retrieve ingredient based on barcode

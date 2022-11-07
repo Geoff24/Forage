@@ -17,14 +17,15 @@ const RecipesScreen = ({route}) => {
     // TODO: Make API key secret
     const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
     const recipesUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey='
+    const ingredients = route.params.scannedItems
     
 
     useEffect(() => {
+        console.log(ingredients)
         fetch(recipesUrl + recipeApiKey + "&ingredients=" + "chicken,flour&")
         .then((response) => response.json())
         .then((json) => {
             setRecipes(json)
-            console.log(recipes)
         })
         .catch((error) => alert(error))
     }, [])    

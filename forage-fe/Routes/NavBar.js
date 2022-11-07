@@ -23,9 +23,14 @@ const Tab = createBottomTabNavigator();
 function ScannerStackScreen(){
     return(
         <Tab.Navigator 
-        initialRouteName='Scanner'
-        screenOptions={{headerShown: false}}
-        
+            initialRouteName='Scanner'
+            screenOptions={{headerShown: false}}
+            tabBarOptions={{
+                showLabel: false,
+                activeTintColor: '#EB3737',
+                inactiveTintColor: '#363636',
+            }}
+            
         >
             
             <Tab.Screen name="Home" 
@@ -33,7 +38,7 @@ function ScannerStackScreen(){
             options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({color, size}) => (
-                    <Ionicons name="home" color={color} size={size}/>
+                    <Ionicons name="home-outline" color={color} size="30%"/>
                 )
             }}
             
@@ -43,7 +48,7 @@ function ScannerStackScreen(){
             options={{
                 tabBarLabel: "Favorites",
                 tabBarIcon: ({color, size}) => (
-                    <Ionicons name="heart" color={color} size={size}/>
+                    <Ionicons name="heart-outline" color={color} size="30%"/>
                 )
             }}
             />
@@ -52,7 +57,7 @@ function ScannerStackScreen(){
                 options={{
                     tabBarLabel: "Scanner",
                     tabBarIcon: ({color, size}) => (
-                        <Ionicons name="camera" color={color} size={size}/>
+                        <Ionicons name="camera-outline" color={color} size="35%"/>
                     )
                 }}
             />
@@ -61,16 +66,15 @@ function ScannerStackScreen(){
             options={{
                 tabBarLabel: "Pantry",
                 tabBarIcon:({color, size}) => (
-                    <Entypo name="shop" color={color} size={size}/>
+                    <Ionicons name="cart-outline" color={color} size="33%"/>
                 )
             }}
             />
             <Tab.Screen name="Profile" 
             component={ProfileScreen} 
             options={{
-                tabBarLabel: "Profile",
                 tabBarIcon:({color, size}) => (
-                    <Ionicons name="person" color={color} size={size}/>
+                    <Ionicons name="person-outline" color={color} size="30%"/>
                 )
             }}
             />
@@ -79,15 +83,12 @@ function ScannerStackScreen(){
 }
 
 
-
-
-
 const Stack = createNativeStackNavigator();
 
 const NavigationBar = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator >
+            <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Signup" component={SignupScreen} />
