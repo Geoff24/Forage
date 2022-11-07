@@ -29,7 +29,7 @@ const RecipesScreen = ({route}) => {
         .catch((error) => alert(error))
     }, [])    
 
-    console.log(route.params.scannedItems)
+    // console.log(route.params.scannedItems)
 
     const [searchBarValue, setSearchBarValue] = useState('');
     
@@ -37,8 +37,8 @@ const RecipesScreen = ({route}) => {
         <View style={styles.container}>
             <TextInput placeholder='Search' value={searchBarValue} onChangeText={setSearchBarValue} style={styles.searchBar}/>
             <ScrollView style={styles.allRecipes}>
-                {recipes.map((recipe, index) => (
-                    <RecipeItem recipe={recipe} />
+                {recipes.map((recipe) => (
+                    <RecipeItem recipe={recipe}/>
                 ))}
             </ScrollView>
         </View>
