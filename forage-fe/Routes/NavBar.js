@@ -15,6 +15,7 @@ import HomeScreen from '../screens/Home';
 import FavoritesScreen from '../screens/Favorites';
 import PantryScreen from '../screens/Pantry';
 import ProfileScreen from '../screens/Profile';
+import RecipeInfoScreen from '../screens/RecipeInfo';
 
 const Tab = createBottomTabNavigator();
 
@@ -86,13 +87,14 @@ const Stack = createNativeStackNavigator();
 const NavigationBar = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Navigator >
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Signup" component={SignupScreen} />
                 <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
                 <Stack.Screen name="Scanner" component={ScannerStackScreen} />
                 <Stack.Screen name="Recipes" component={RecipesScreen}/>
+                <Stack.Screen name="RecipeInfo" component={RecipeInfoScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

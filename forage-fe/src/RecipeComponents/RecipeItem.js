@@ -3,12 +3,15 @@ import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-n
 import { CheckBox } from 'react-native-elements'
 
 const RecipeItem = ( {recipe} ) => {
+
     return (
-        <View style={styles.container}>
+        
+        <View style={styles.container } >
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.recipeTitle}>{recipe.title}</Text>
             <Text style={styles.recipe_info}>{recipe.likes}</Text>
         </View>
+        
     )
 }
 
