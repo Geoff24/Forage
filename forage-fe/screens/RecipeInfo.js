@@ -5,6 +5,7 @@ import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
 import {useForm, Controller} from 'react-hook-form'
+import BackButton from '../src/CustomButton/BackButton';
 
 
 const RecipeInfoScreen = ( {route} ) => {
@@ -14,8 +15,7 @@ const RecipeInfoScreen = ( {route} ) => {
     // TODO: Make API key secret
     const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
     const recipesUrl = `https://api.spoonacular.com/recipes/${recipe.id}/analyzedInstructions?apiKey=${recipeApiKey}`
-    // `https://api.spoonacular.com/recipes//analyzedInstructions?apiKey=${recipeApiKey}`
-    // https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=4a1a5f9e9b3b456bac7a6119b023590e
+    
 
     
     useEffect(() => {
@@ -30,13 +30,15 @@ const RecipeInfoScreen = ( {route} ) => {
 
     
     return (
-        <SafeAreaView style={styles.root}>
-            <Text style={styles.recipeTitle}>{recipe.title}</Text>
+
+        <View style={styles.root}>
+            <BackButton/>
+
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.directionTitle}>Directions: </Text>
             {recipeinfo.length>0 && <Text style = {styles.recipeText}>{recipeinfo[0]["steps"][0]["step"]}</Text>}
             
-        </SafeAreaView>
+        </View>
     )
 }
 
