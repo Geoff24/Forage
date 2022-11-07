@@ -87,14 +87,15 @@ const Stack = createNativeStackNavigator();
 const NavigationBar = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator >
-                <Stack.Screen name="Splash" component={SplashScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Signup" component={SignupScreen} />
-                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-                <Stack.Screen name="Scanner" component={ScannerStackScreen} />
-                <Stack.Screen name="Recipes" component={RecipesScreen}/>
-                <Stack.Screen name="RecipeInfo" component={RecipeInfoScreen} />
+            <Stack.Navigator screenOptions={{headerShown:false}}>
+                <Stack.Screen name="Splash" component={SplashScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="Login" component={LoginScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="Signup" component={SignupScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="Scanner" component={ScannerStackScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="Recipes" component={RecipesScreen} options={{title:"",headerBackTitleVisible: false}}/>
+                <Stack.Screen name="RecipeInfo" component={RecipeInfoScreen} options={{title:"", headerBackTitleVisible: false}}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

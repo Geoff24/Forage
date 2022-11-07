@@ -29,7 +29,6 @@ const RecipesScreen = () => {
         .then((response) => response.json())
         .then((json) => {
             setRecipes(json)
-            console.log(recipes)
         })
         .catch((error) => alert(error))
     }, [])    
