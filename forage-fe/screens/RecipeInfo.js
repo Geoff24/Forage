@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, SafeAreaView } from 'react-native'
 import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
@@ -30,10 +30,13 @@ const RecipeInfoScreen = ( {route} ) => {
 
     
     return (
+
         <View style={styles.root}>
             <BackButton/>
+
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
-            {recipeinfo.length>0 && <Text style = {styles.recipeText}> {recipeinfo[0]["steps"][0]["step"]} </Text>}
+            <Text style={styles.directionTitle}>Directions: </Text>
+            {recipeinfo.length>0 && <Text style = {styles.recipeText}>{recipeinfo[0]["steps"][0]["step"]}</Text>}
             
         </View>
     )
@@ -42,20 +45,36 @@ const RecipeInfoScreen = ( {route} ) => {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
+        // alignItems: 'center',
+        // justifyContent: 'center',
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-
     },
     recipeImage: {
-        width: 200,
-        height: 200,
-        marginRight: '5%',
+        width: '90%',
+        height: '30%',
+        margin: '5%',
     },
-    
+
+    recipeTitle: {
+        fontSize: '30em',
+        fontWeight: 'bold',
+        width: '80%',
+        margin: '5%',
+        marginBottom: '0%'
+    },
+
     recipeText: {
-        color: 'red'
+        color: '#363636',
+        margin: '5%',
+        marginTop: '2%',
+        fontSize: '20em'
     },
+
+    directionTitle: {
+        fontSize: '22em',
+        fontWeight: 'bold',
+        marginLeft: '5%'
+    }
 })
 
 export default RecipeInfoScreen

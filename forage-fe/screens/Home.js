@@ -13,9 +13,6 @@ import Navigation from '../Routes/Navigation'
 
 
 const RecipesScreen = () => {
-
-
-    
     const [searchBarValue, setSearchBarValue] = useState('');
     const [recipes, setRecipes] = useState([]) //TODO change
 
