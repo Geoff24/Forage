@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator, Image, Pressable} from 'react-native';
 import { CheckBox } from 'react-native-elements'
+import Like from './Like';
+
 
 const RecipeItem = ( {recipe} ) => {
 
+
     return (
-        
         <View style={styles.container } >
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.recipeTitle}>{recipe.title}</Text>
-            <Text style={styles.recipe_info}>{recipe.likes}</Text>
+            <Like />
+            {/* <Text style={styles.recipe_info}>{recipe.likes}</Text> */}
         </View>
         
     )
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         top: 20,
         width: '60%',
-        marginRight: '5%',
+
     },
 
     container: {

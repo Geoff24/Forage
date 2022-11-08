@@ -17,7 +17,7 @@ const RecipesScreen = () => {
     const searchRecipeUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
 
     useEffect(() => {
-        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "chicken,flour&")
+        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "apple,sugar&")
         .then((response) => response.json())
         .then((json) => {
             setRecipes(json)
@@ -49,7 +49,6 @@ const RecipesScreen = () => {
             setSearchBarValue(text)
         }
     }
-    
 
     function onPressRecipe(recipe) {
         navigation.navigate("RecipeInfo", {recipe});
