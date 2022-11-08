@@ -3,6 +3,7 @@ import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, Pressab
 import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler'
 import RecipeItem from '../src/RecipeComponents/RecipeItem'
+import apikey from '../src/apiKey'
 
 
 const RecipesScreen = () => {
@@ -11,7 +12,7 @@ const RecipesScreen = () => {
     const [recipes, setRecipes] = useState([]) //TODO change
 
     // TODO: Make API key secret
-    const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
+    const recipeApiKey = apikey;
     const recipesUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey='
     const searchRecipeUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
 
