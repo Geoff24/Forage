@@ -11,9 +11,20 @@ const BackButton = () => {
         navigation.goBack()
     }
     return (
-        <Pressable onPress={onBackButtonPress}>
-            <Ionicons name="chevron-back" color={"red"} size={25}/>
+        <Pressable onPress={onBackButtonPress} style={styles.back}>
+            <Ionicons name="chevron-back" color={"red"} size={'40%'}/>
         </Pressable>
     )
 }
+
+const styles = StyleSheet.create({
+    back: {
+        marginLeft: '5%',
+        marginBottom: '5%',
+        backgroundColor: '#F5F5F5',
+        width: '11%',
+        borderRadius: '10%'
+    }
+})
+
 export default BackButton;
