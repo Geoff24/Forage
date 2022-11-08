@@ -16,6 +16,7 @@ import FavoritesScreen from '../screens/Favorites';
 import PantryScreen from '../screens/Pantry';
 import ProfileScreen from '../screens/Profile';
 import RecipeInfoScreen from '../screens/RecipeInfo';
+import { faSleigh } from '@fortawesome/free-solid-svg-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,12 +25,19 @@ function ScannerStackScreen(){
     return(
         <Tab.Navigator 
             initialRouteName='Scanner'
-            screenOptions={{headerShown: false}}
-            tabBarOptions={{
-                showLabel: false,
-                activeTintColor: '#EB3737',
-                inactiveTintColor: '#363636',
-            }}
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: "#EB3737",
+                tabBarInactiveTintColor: "#363636",
+                tabBarShowLabel: false,
+                tabBarStyle: [
+                  {
+                    "display": "flex"
+                  },
+                  null
+                ]
+              }}
+            
             
         >
             

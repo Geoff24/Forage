@@ -14,6 +14,7 @@ import Navigation from '../Routes/Navigation'
 
 const RecipesScreen = () => {
     const [searchBarValue, setSearchBarValue] = useState('');
+    const [dataSource, setDataSource] = useState([]);
     const [recipes, setRecipes] = useState([]) //TODO change
 
     // TODO: Make API key secret
@@ -26,11 +27,26 @@ const RecipesScreen = () => {
         .then((response) => response.json())
         .then((json) => {
             setRecipes(json)
+            setDataSource(json)
         })
         .catch((error) => alert(error))
     }, [])    
 
     const navigation = useNavigation();
+
+    const searchFunction = (text) => {
+        if (text){
+            const newData = recipes.filter(function (item) {
+                return item["title"].toLowerCase().includes(text.toLowerCase())
+            })
+            setRecipes(newData)
+            setSearchBarValue(text)
+        }
+        else{
+            setRecipes(dataSource)
+            setSearchBarValue(text)
+        }
+    }
 
     function onPressRecipe(recipe){
         
@@ -39,7 +55,7 @@ const RecipesScreen = () => {
     
     return (
         <View style={styles.container}>
-            <TextInput placeholder='Search' value={searchBarValue} onChangeText={setSearchBarValue} style={styles.searchBar}/>
+            <TextInput placeholder='Search' value={searchBarValue} onChangeText={ (text) => searchFunction(text)} style={styles.searchBar}/>
             <ScrollView style={styles.allRecipes}>
                 {recipes.map((recipe) => (
                     <Pressable onPress={() => onPressRecipe(recipe)} key={recipe.id}>
