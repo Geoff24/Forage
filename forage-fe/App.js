@@ -2,6 +2,8 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs()
 
 
 // import Navigation from './Routes/Navigation';
