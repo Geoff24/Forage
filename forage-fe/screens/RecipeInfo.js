@@ -22,10 +22,12 @@ const RecipeInfoScreen = ( {route} ) => {
         .then((response) => response.json())
         .then((json) => {
             console.log(json)
-            setRecipeSteps(json[0].steps)
-            setRecipeinfo(json)
+            if(json.length > 0){
+                setRecipeSteps(json[0].steps)
+                setRecipeinfo(json)
+            }
         })
-        .catch((error) => alert(error))
+        .catch((error) => console.log(error))
     }, [])
 
     return (
@@ -38,7 +40,7 @@ const RecipeInfoScreen = ( {route} ) => {
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.directionTitle}>Directions: </Text>
             
-            {recipeinfo.length>0 && 
+            {recipeinfo.length>0 ? 
             <Swiper style={styles.directionBox}>
                 {recipeSteps.map((recipeStep, index)=>
                     <ScrollView style={styles.directionBox} key={index}>
@@ -46,7 +48,7 @@ const RecipeInfoScreen = ( {route} ) => {
                         <Text style = {styles.recipeText}>{recipeStep.step}</Text>
                     </ScrollView> 
                 )}
-            </Swiper>}
+            </Swiper> : <Text style={styles.recipeStepNum}>No directions available</Text>}
             
         </SafeAreaView>
     )
