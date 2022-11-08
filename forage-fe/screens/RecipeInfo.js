@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, SafeAreaView } from 'react-native'
 import Swiper from 'react-native-swiper'
 import BackButton from '../src/CustomButton/BackButton';
+import apikey from '../src/apiKey';
 
 
 const RecipeInfoScreen = ( {route} ) => {
@@ -11,7 +12,7 @@ const RecipeInfoScreen = ( {route} ) => {
     const [recipeSteps, setRecipeSteps] = useState([])
     const recipe = route.params.recipe
     // TODO: Make API key secret
-    const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
+    const recipeApiKey = apikey;
     const recipesUrl = `https://api.spoonacular.com/recipes/${recipe.id}/analyzedInstructions?apiKey=${recipeApiKey}`
     // https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=4a1a5f9e9b3b456bac7a6119b023590e
 
@@ -39,7 +40,7 @@ const RecipeInfoScreen = ( {route} ) => {
             {recipeinfo.length>0 && 
             <Swiper style={styles.directionBox}>
                 {recipeSteps.map((recipeStep, index)=>
-                    <ScrollView style={styles.directionBox}>
+                    <ScrollView style={styles.directionBox} key={index}>
                         <Text style = {styles.recipeStepNum}>Step {index + 1}</Text>
                         <Text style = {styles.recipeText}>{recipeStep.step}</Text>
                     </ScrollView> 

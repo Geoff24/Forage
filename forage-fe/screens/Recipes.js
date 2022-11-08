@@ -9,6 +9,7 @@ import {useForm, Controller} from 'react-hook-form';
 import { TextInput } from 'react-native-gesture-handler'
 import NavigationBar from '../Routes/NavBar'
 import RecipeItem from '../src/RecipeComponents/RecipeItem'
+import apikey from '../src/apiKey'
 
 
 const RecipesScreen = ({route}) => {
@@ -17,7 +18,7 @@ const RecipesScreen = ({route}) => {
     const [searchBarValue, setSearchBarValue] = useState('');
 
     // TODO: Make API key secret
-    const recipeApiKey = '4a1a5f9e9b3b456bac7a6119b023590e'
+    const recipeApiKey = apikey;
     const recipesUrl = 'https://api.spoonacular.com/recipes/findByIngredients?apiKey='
     const ingredients = route.params.scannedItems
     
@@ -38,6 +39,7 @@ const RecipesScreen = ({route}) => {
 
     const searchFunction = (text) => {
         if (text){
+            setRecipes(dataSource)
             const newData = recipes.filter(function (item) {
                 return item["title"].toLowerCase().includes(text.toLowerCase())
             })
