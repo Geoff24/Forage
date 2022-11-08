@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, SafeAreaView } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, SafeAreaView, Pressable } from 'react-native'
 import Swiper from 'react-native-swiper'
 import BackButton from '../src/CustomButton/BackButton';
 import apikey from '../src/apiKey';
-
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Like from '../src/RecipeComponents/Like';
 
 const RecipeInfoScreen = ( {route} ) => {
-
     const [recipeinfo, setRecipeinfo] = useState([])
     const [recipeSteps, setRecipeSteps] = useState([])
     const recipe = route.params.recipe
@@ -27,13 +27,14 @@ const RecipeInfoScreen = ( {route} ) => {
         })
         .catch((error) => alert(error))
     }, [])
-    
 
-    
     return (
         <SafeAreaView style={styles.root}>
             <BackButton style={styles.back}/>
-            <Text style={styles.recipeTitle}>{recipe.title}</Text>
+            <View style={styles.titleBox}>
+                <Text style={styles.recipeTitle}>{recipe.title}</Text>
+                <Like />
+            </View>
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.directionTitle}>Directions: </Text>
             
@@ -67,9 +68,9 @@ const styles = StyleSheet.create({
     recipeTitle: {
         fontSize: '30em',
         fontWeight: 'bold',
-        width: '80%',
-        marginLeft: '5%',
-        marginBottom: '0%'
+        width: '75%',
+        marginHorizontal: '5%',
+        marginBottom: '0%',
     },
 
     recipeText: {
@@ -95,6 +96,11 @@ const styles = StyleSheet.create({
     directionBox: {
 
     },
+
+    titleBox:{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    }
 })
 
 export default RecipeInfoScreen
