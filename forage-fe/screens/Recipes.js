@@ -38,6 +38,7 @@ const RecipesScreen = ({route}) => {
 
     const searchFunction = (text) => {
         if (text){
+            setRecipes(dataSource)
             const newData = recipes.filter(function (item) {
                 return item["title"].toLowerCase().includes(text.toLowerCase())
             })

@@ -47,6 +47,7 @@ const RecipesScreen = () => {
             setSearchBarValue(text)
         }
     }
+    
 
     function onPressRecipe(recipe){
         
