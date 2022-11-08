@@ -29,10 +29,9 @@ const RecipeInfoScreen = ( {route} ) => {
 
     
     return (
-
-        <View style={styles.root}>
-            <BackButton/>
-
+        <SafeAreaView style={styles.root}>
+            <BackButton style={styles.back}/>
+            <Text style={styles.recipeTitle}>{recipe.title}</Text>
             <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
             <Text style={styles.directionTitle}>Directions: </Text>
             
@@ -46,7 +45,7 @@ const RecipeInfoScreen = ( {route} ) => {
                 )}
             </Swiper>}
             
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
         fontSize: '30em',
         fontWeight: 'bold',
         width: '80%',
-        margin: '5%',
+        marginLeft: '5%',
         marginBottom: '0%'
     },
 
@@ -93,8 +92,7 @@ const styles = StyleSheet.create({
     },
     directionBox: {
 
-    }
-    
+    },
 })
 
 export default RecipeInfoScreen
