@@ -106,8 +106,8 @@ function BarcodeScanner() {
                         <BottomSheetView style={styles.sheetStyle}>
                             <Text style={styles.sheetTitle}>My Ingredients</Text>
                             <ScrollView>
-                            {scannedItems.map((itemData) => (
-                                <ScannedItem item={itemData}/>
+                            {scannedItems.map((itemData, index) => (
+                                <ScannedItem item={itemData} key={index}/>
                             ))}
                             </ScrollView>
                         </BottomSheetView>
