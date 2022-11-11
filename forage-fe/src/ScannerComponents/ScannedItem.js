@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
 import { CheckBox } from 'react-native-elements'
 
-const ScannedItem = ( {item} ) => {
+const ScannedItem = ( {item, barcodeNumber} ) => {
     const [checked, setChecked] = useState(true)
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} key={barcodeNumber}>
             <Image style={styles.image} source={{uri: item.images[0]}}/>
             <Text style={styles.maintext}>{item.title}</Text>
             <View style={styles.checkBox}>

@@ -26,7 +26,7 @@ const RecipesScreen = ({route}) => {
 
     useEffect(() => {
         console.log(ingredients)
-        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "chicken,flour&")
+        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "potato,rice,cheese,bread,beef&")
         .then((response) => response.json())
         .then((json) => {
             setRecipes(json)
