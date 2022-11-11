@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler'
 import RecipeItem from '../src/RecipeComponents/RecipeItem'
 import apikey from '../src/apiKey'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import RecipeTag from '../src/RecipeComponents/RecipeTag'
 
 
 const RecipesScreen = () => {
@@ -57,9 +59,15 @@ const RecipesScreen = () => {
     return (
         <View style={styles.container}>
             <TextInput placeholder='Search' value={searchBarValue} onChangeText={ (text) => searchFunction(text)} style={styles.searchBar}/>
+            <Ionicons style={styles.funnel} name={"funnel-outline"} color={"black"} size="30%"/>
 
             {recipes.length>0 &&
             <ScrollView style={styles.allRecipes}>
+                <View style={styles.recipeTags}>
+                    <RecipeTag tag= "Trending"/>
+                    <RecipeTag tag= "Healthy"/>
+                </View>
+                
                 {recipes.map((recipe) => (
                     <Pressable onPress={() => onPressRecipe(recipe)} key={recipe.id}>
                         <RecipeItem recipe={recipe} />
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
     },
 
     allRecipes: {
-        top: '10%',
+        top: '5%',
     },
 
     searchBar: {
@@ -94,4 +102,13 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
 
+    funnel:{
+        top: '3%',
+        left:'90%',
+        width:'10%',
+    },
+
+    recipeTags: {
+        flexDirection: 'row'
+    }
 })
