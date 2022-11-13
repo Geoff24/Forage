@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image} from 'react-native';
-import { CheckBox } from 'react-native-elements'
+import { CheckBox } from '@rneui/base';
 
 const ScannedItem = ( {item, barcodeNumber} ) => {
     const [checked, setChecked] = useState(true)
