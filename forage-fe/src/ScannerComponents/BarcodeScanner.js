@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner'
-import { StyleSheet, View, Text, Button, ActivityIndicator, Image, ScrollView, ImageBackground, Pressable} from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator, Image, ScrollView, ImageBackground, Pressable } from 'react-native';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { useNavigation } from '@react-navigation/native'
 import CustomButton from '../CustomButton/CustomButton';
@@ -10,8 +10,8 @@ import Navigation from '../../Routes/Navigation';
 function BarcodeScanner() {
     const navigation = useNavigation();
 
-  // TODO: Make API key secret
-    const barcodeLookupApiKey = 'gr6910dgjog4bo34vd4u97rfhthrrf';
+    // TODO: Make API key secret
+    const barcodeLookupApiKey = '7jz7t05tyezke5vk93ba92kwhr6ewp';
     const [loading, setLoading] = useState(true);
 
     const [hasPermission, setHasPermission] = useState(null);
@@ -26,8 +26,8 @@ function BarcodeScanner() {
     // Request Camera Permission
     const askForCameraPermission = () => {
         (async () => {
-        const { status } = await BarCodeScanner.requestPermissionsAsync();
-        setHasPermission(status === 'granted' ? <Text /> : null);
+            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            setHasPermission(status === 'granted' ? <Text /> : null);
         })()
     }
 
@@ -37,22 +37,22 @@ function BarcodeScanner() {
 
     // When done is clicked
     const onDonePressed = () => {
-        navigation.navigate('Recipes', {scannedItems})
+        navigation.navigate('Recipes', { scannedItems })
     }
 
     // Barcode is scanned
-    const handleBarCodeScanned = ({type, data}) => {
+    const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
 
         sheetRef.current?.snapToIndex(0)
         setIsOpen(true)
 
         fetch('https://api.barcodelookup.com/v3/products?barcode=' + data + '&formatted=y&key=' + barcodeLookupApiKey)
-        .then((response) => response.json() )
-        .then((json) => {
-            setScannedItems([...scannedItems, json.products[0]])
-        })
-        .catch((error) => setLoading(false))
+            .then((response) => response.json())
+            .then((json) => {
+                setScannedItems([...scannedItems, json.products[0]])
+            })
+            .catch((error) => setLoading(false))
     }
 
     // Retrieve ingredient based on barcode
@@ -60,18 +60,18 @@ function BarcodeScanner() {
     // Check Permission and return screens
     if (hasPermission === null) {
         return (
-        <View>
-            <Text>Requsting camera permission</Text>
-        </View>
+            <View>
+                <Text>Requsting camera permission</Text>
+            </View>
         )
     }
 
     if (hasPermission === false) {
         return (
-        <View style={styles.barcodebox}>
-            <Text>No access to camera</Text>;
-            <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} /> 
-        </View>
+            <View style={styles.barcodebox}>
+                <Text>No access to camera</Text>;
+                <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+            </View>
         )
     }
 
@@ -83,15 +83,15 @@ function BarcodeScanner() {
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={{ height: '100%', width: '100%' }}
                 >
-                    
+
                     <ImageBackground
-                        style={[styles.scanImage, {opacity: isOpen ? 0 : 1}]}
-                        source={{uri: 'https://i.stack.imgur.com/VVqSa.png'}}
+                        style={[styles.scanImage, { opacity: isOpen ? 0 : 1 }]}
+                        source={{ uri: 'https://i.stack.imgur.com/VVqSa.png' }}
                     >
                         <Pressable onPress={onDonePressed} style={styles.done}>
                             <Text style={styles.buttonText}>Done</Text>
                         </Pressable>
-                    </ImageBackground>  
+                    </ImageBackground>
 
                     <BottomSheet
                         ref={sheetRef}
@@ -99,16 +99,16 @@ function BarcodeScanner() {
                         enablePanDownToClose={true}
                         index={-1}
                         onClose={() => {
-                        setIsOpen(false)
-                        setScanned(false)
+                            setIsOpen(false)
+                            setScanned(false)
                         }}
                     >
                         <BottomSheetView style={styles.sheetStyle}>
                             <Text style={styles.sheetTitle}>My Ingredients</Text>
                             <ScrollView>
-                            {scannedItems.map((itemData, index) => (
-                                <ScannedItem item={itemData} key={index}/>
-                            ))}
+                                {scannedItems.map((itemData, index) => (
+                                    <ScannedItem item={itemData} key={index} />
+                                ))}
                             </ScrollView>
                         </BottomSheetView>
                     </BottomSheet>
@@ -140,16 +140,16 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 30,
     },
-    
+
     sheetStyle: {
         flex: 1
     },
 
-    sheetTitle:{
+    sheetTitle: {
         padding: 5,
         fontSize: 19,
         fontWeight: 'bold',
-        textAlign:'center'
+        textAlign: 'center'
     },
 
     done: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         borderWidth: 2
     },
 
-    buttonText:{
+    buttonText: {
         fontWeight: 'bold',
         color: 'white',
         fontSize: 22,
