@@ -37,7 +37,8 @@ export class UsersController {
     const { username } = userData;
     const user = await this.usersService.user({ username: username})
     return {
-      id: user.id
+      id: user.id,
+      email: user.email
     };
   }
 
