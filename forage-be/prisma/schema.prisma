@@ -17,4 +17,8 @@ model User {
     password String
 }
 
+model Pantry {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
 // vim: ft=prisma ts=4 sw=4 sts=-1 sta et
