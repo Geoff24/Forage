@@ -1,6 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { User as UserModel } from '@prisma/client';
 import { UsersService } from './users.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import * as bcrypt from 'bcrypt';
 
 const SALT_ROUNDS = 12;
@@ -20,11 +21,26 @@ export class UsersController {
     const { email, username, password } = userData;
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
     return this.usersService.createUser({
-      email,
-      username,
+      email: email,
+      username: username,
       password: passwordHash,
     });
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('profile')
+  async logout(
+    @Body() userData: {
+      username: string,
+    },
+  ): Promise<any> {
+    const { username } = userData;
+    const user = await this.usersService.user({ username: username})
+    return {
+      id: user.id
+    };
+  }
+
 
 
 }
