@@ -5,13 +5,20 @@ import CustomInput from '../src/CustomInput/CustomInput'
 import CustomButton from '../src/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
 import {useForm, Controller} from 'react-hook-form'
+import BarcodeScanner from '../src/ScannerComponents/BarcodeScanner';
 
 const PantryScreen = () => {
-    
+    const [pantryList, setPantryList] = useState([])
+
+
+    const onAddtoPantryPressed = () => {
+        // pull up scanner
+    }
+
     return (
         <View style={styles.root}>
-
-            <Text style = {styles.text}>Pantry Screen</Text>
+            {pantryList.length > 0 ? <Text>Items in pantry</Text> : <Text>No items in pantry</Text>}
+            <CustomButton text="Add to Pantry" onPress={onAddtoPantryPressed}/>
             
         </View>
     )

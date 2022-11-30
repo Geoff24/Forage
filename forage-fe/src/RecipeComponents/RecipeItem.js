@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image, Pressable} from 'react-native';
-import { CheckBox } from 'react-native-elements'
+import { CheckBox } from '@rneui/base';
 import Like from './Like';
 
 
