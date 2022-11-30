@@ -8,10 +8,13 @@ import { useNavigation } from '@react-navigation/native'
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import {useForm, Controller} from 'react-hook-form';
 import { TextInput } from 'react-native-gesture-handler'
+import * as SecureStore from 'expo-secure-store';
+import { AsyncStorage } from 'react-native';
 
 const LoginScreen = () => {
     // const [username, setUsername] = useState('');
     // const [password, setPassword] = useState('');
+    const [loginFailed, setLoginFailed] = useState(false);
 
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
@@ -21,13 +24,20 @@ const LoginScreen = () => {
 
     const onLoginPressed = async (data) => {
         
-        
-        const response = await axios.post("http://localhost:3000/users/login", data)
-        if (response.data.code === 200){
+        try{
+            const response = await axios.post("http://localhost:3000/auth/login", data)
+            console.log(response)
+            setLoginFailed(false)
+            await SecureStore.setItemAsync("username", data.username);
+            await SecureStore.setItemAsync("access_token", response.data.access_token);
+            await AsyncStorage.setItem("username", data.username)
+            await AsyncStorage.setItem("access_token", response.data.access_token)
+            //console.log(await SecureStore.getItemAsync("username"))
             navigation.navigate("Scanner")
-        }
-        else{
-            //TODO figure out what happens if login fails
+
+        } catch(e){
+            console.log(e)
+            setLoginFailed(true);
         }
     
         
@@ -54,9 +64,9 @@ const LoginScreen = () => {
             style={styles.logo} 
             resizeMode = "contain" />
 
-            <CustomInput name="Username" placeholder="Username" control={control} rules={{required: "Username is required"}} />
-            <CustomInput name="Password" placeholder="Password" control={control} rules={{required: "Password is required"}} secureTextEntry/>
-            
+            <CustomInput name="username" placeholder="Username" control={control} rules={{required: "Username is required"}} />
+            <CustomInput name="password" placeholder="Password" control={control} rules={{required: "Password is required"}} secureTextEntry/>
+            {loginFailed && <Text style={{color:"red"}}>Invalid username or password</Text>}
 
             <CustomButton text="Log in" onPress={handleSubmit(onLoginPressed)}/>
 
