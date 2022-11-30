@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function ScannerStackScreen(){
     return(
         <Tab.Navigator 
-            initialRouteName='Scanner'
+            initialRouteName='Main'
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: "#EB3737",
@@ -60,7 +60,7 @@ function ScannerStackScreen(){
                 )
             }}
             />
-            <Tab.Screen name="Scanner" 
+            <Tab.Screen name="Main" 
                 component={ScannerScreen} 
                 options={{
                     tabBarLabel: "Scanner",

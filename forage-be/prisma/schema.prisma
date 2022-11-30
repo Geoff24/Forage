@@ -15,8 +15,6 @@ model User {
     email    String  @unique
     username String  @unique
     password String
-    pantry   Pantry?
-    likes    Like?
 }
 
 model Like {
