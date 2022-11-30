@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function ScannerStackScreen(){
     return(
         <Tab.Navigator 
-            initialRouteName='Main'
+            initialRouteName='Home'
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: "#EB3737",
