@@ -2,10 +2,12 @@ import { Controller, Get, Post, Body, Req, UseGuards } from '@nestjs/common';
 import { LikesService } from './likes.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Like as LikeModel } from '@prisma/client';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('likes')
 export class LikesController {
-  constructor(private readonly likesService: LikesService) { }
+  constructor(
+    private readonly likesService: LikesService) { }
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -24,7 +26,7 @@ export class LikesController {
     @Body() likeData: {
       apiId: string;
     }
-  ): Promise<LikeModel> {
+  ): Promise<LikeModel | null> {
     const { apiId } = likeData;
     return await this.likesService.create({
       apiId,
@@ -41,12 +43,15 @@ export class LikesController {
   async unlike(
     @Req() req,
     @Body() unlikeData: {
-      likeId: string;
+      apiId: string;
     }
   ): Promise<LikeModel> {
-    const { likeId } = unlikeData;
+    const { apiId } = unlikeData;
     return await this.likesService.remove({
-      id: likeId
+      userId_apiId: {
+        userId: req.user.id,
+        apiId
+      }
     })
   }
 }
