@@ -15,7 +15,7 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.user({ username: username });
-    if (user && bcrypt.compare(password, user.password)) {
+    if (user && await bcrypt.compare(password, user.password)) {
       const { password, ...result } = user;
       return result;
     }
@@ -30,18 +30,6 @@ export class AuthService {
       access_token: token
     };
   }
-
-  async getAccessToken(payload, secret: string) {
-    return await this.jwtService.signAsync(payload, { secret });
-  }
-
-  /*
-  async getRefreshToken(payload) {
-    const secret = this.configService.get<string>('JWT_REFRESH_SECRET', 'secret');
-    return await this.jwtService.signAsync(payload, { secret: secret });
-  }
-  */
-
 }
 
 // vim: ft=typescript ts=2 sw=2 sts=-1 sta et
