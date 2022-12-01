@@ -1,10 +1,15 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { Ingredient as IngredientModel } from '@prisma/client';
 import { IngredientsService } from './ingredients.service';
 
 @Controller('ingredients')
 export class IngredientsController {
   constructor(private readonly ingredientsService: IngredientsService) { }
+
+  @Get()
+  async getAll(): Promise<IngredientModel[]> {
+    return this.ingredientsService.findAll({});
+  }
 
 
   @Post('create')
