@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import {useForm, Controller} from 'react-hook-form'
 
 const FavoritesScreen = () => {
+    const [recipes, setRecipes] = useState([])
     
     return (
         <View style={styles.root}>

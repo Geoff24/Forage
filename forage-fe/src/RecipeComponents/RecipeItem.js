@@ -21,7 +21,7 @@ const RecipeItem = ( {recipe} ) => {
                 </View>
             </View>
             
-            <Like />
+            <Like recipe={recipe}/>
             
             {/* <Text style={styles.recipe_info}>{recipe.likes}</Text> */}
         </View>
