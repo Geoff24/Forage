@@ -19,61 +19,61 @@ const RecipesScreen = () => {
     const searchRecipeUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
 
     useEffect(() => {
-        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "apple,sugar&")
-        .then((response) => response.json())
-        .then((json) => {
-            setRecipes(json)
-            setDataSource(json)
-        })
-        .catch((error) => alert(error))
-    }, [])    
+        fetch(recipesUrl + recipeApiKey + "&ingredients=" + "apple,sugar,cranberries,unsalted butter,oats&")
+            .then((response) => response.json())
+            .then((json) => {
+                setRecipes(json)
+                setDataSource(json)
+            })
+            .catch((error) => alert(error))
+    }, [])
 
     const navigation = useNavigation();
 
     const searchFunction = (text) => {
-        if (text){
+        if (text) {
             fetch(searchRecipeUrl + recipeApiKey + "&query=" + text)
-            .then((response) => response.json())
-            .then((json) => {
-                setRecipes(json.results)
-                setDataSource(json.results)
-                console.log(recipes)
-            })
-            .catch((error) => alert(error))
+                .then((response) => response.json())
+                .then((json) => {
+                    setRecipes(json.results)
+                    setDataSource(json.results)
+                    console.log(recipes)
+                })
+                .catch((error) => alert(error))
             // const newData = recipes.filter(function (item) {
             //     return item["title"].toLowerCase().includes(text.toLowerCase())
             // })
 
             setSearchBarValue(text)
         }
-        else{
+        else {
             setRecipes(dataSource)
             setSearchBarValue(text)
         }
     }
 
     function onPressRecipe(recipe) {
-        navigation.navigate("RecipeInfo", {recipe});
+        navigation.navigate("RecipeInfo", { recipe });
     }
-    
+
     return (
         <View style={styles.container}>
-            <TextInput placeholder='Search' value={searchBarValue} onChangeText={ (text) => searchFunction(text)} style={styles.searchBar}/>
-            <Ionicons style={styles.funnel} name={"funnel-outline"} color={"black"} size="30%"/>
+            <TextInput placeholder='Search' value={searchBarValue} onChangeText={(text) => searchFunction(text)} style={styles.searchBar} />
+            <Ionicons style={styles.funnel} name={"funnel-outline"} color={"black"} size="30%" />
 
-            {recipes.length>0 &&
-            <ScrollView style={styles.allRecipes}>
-                <View style={styles.recipeTags}>
-                    <RecipeTag tag= "Trending"/>
-                    <RecipeTag tag= "Healthy"/>
-                </View>
-                
-                {recipes.map((recipe) => (
-                    <Pressable onPress={() => onPressRecipe(recipe)} key={recipe.id}>
-                        <RecipeItem recipe={recipe} />
-                    </Pressable>
-                ))}
-            </ScrollView>}
+            {recipes.length > 0 &&
+                <ScrollView style={styles.allRecipes}>
+                    <View style={styles.recipeTags}>
+                        <RecipeTag tag="Trending" />
+                        <RecipeTag tag="Healthy" />
+                    </View>
+
+                    {recipes.map((recipe) => (
+                        <Pressable onPress={() => onPressRecipe(recipe)} key={recipe.id}>
+                            <RecipeItem recipe={recipe} />
+                        </Pressable>
+                    ))}
+                </ScrollView>}
         </View>
     )
 }
@@ -82,7 +82,7 @@ export default RecipesScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#FFF',
+        backgroundColor: '#FFF',
     },
 
     allRecipes: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     searchBar: {
         backgroundColor: '#FBFBFB',
         top: '7%',
-        left:'2%',
+        left: '2%',
         width: '85%',
         height: '5%',
         paddingLeft: '5%',
@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
 
-    funnel:{
-        top: '3%',
-        left:'90%',
-        width:'10%',
+    funnel: {
+        top: '2.5%',
+        left: '89%',
+        width: '10%',
     },
 
     recipeTags: {

@@ -14,7 +14,7 @@ const RecipeItem = ({ recipe }) => {
             <Image style={styles.recipeImage} source={{ uri: recipe.image }} />
             <View style={styles.textDetails}>
                 <Text style={styles.recipeTitle}>{recipe.title}</Text>
-                <Text style={styles.missingIngredients}>Missing Ingredients: {missingIngredients}</Text>
+                {missingIngredients > 0 ? <Text style={styles.missingIngredients}>{missingIngredients} missing ingredients</Text> : <View></View>}
                 <View style={styles.recipeInfoBox}>
                     {/* <Text style={styles.recipeInfo}>Calories: </Text> */}
                     <Text style={styles.recipeInfoData}>{calories} calories</Text>
@@ -79,7 +79,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     missingIngredients: {
-
+        backgroundColor: '#EB3737',
+        color: '#FFFFFF',
+        width: '70%',
+        padding: '2%',
+        marginVertical: '2%',
+        borderRadius: '10%',
+        overflow: 'hidden',
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
+        marginBottom: '1%'
     }
 });
 
