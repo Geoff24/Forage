@@ -16,6 +16,7 @@ model User {
     username String  @unique
     password String
     likes    Like[]
+    pantry   Pantry?
 }
 
 model Like {
@@ -28,9 +29,19 @@ model Like {
 }
 
 model Ingredient {
-    id    String @id @default(auto()) @map("_id") @db.ObjectId
-    name  String
-    apiId String
+    id        String  @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    apiId     String
+    pantry    Pantry[] @relation(fields: [pantryIds], references: [id])
+    pantryIds String[] @db.ObjectId
+}
+
+model Pantry {
+    id            String       @id @default(auto()) @map("_id") @db.ObjectId
+    user          User         @relation(fields: [userId], references: [id])
+    userId        String       @unique @db.ObjectId
+    ingredients   Ingredient[] @relation(fields: [ingredientIds], references: [id])
+    ingredientIds String[]     @db.ObjectId
 }
 
 // vim: ft=prisma ts=4 sw=4 sts=-1 sta et

@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { LikesModule } from './likes/likes.module';
+import { PantryModule } from './pantry/pantry.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { LikesModule } from './likes/likes.module';
     JwtModule,
     IngredientsModule,
     LikesModule,
+    PantryModule
   ],
   controllers: [],
 })
