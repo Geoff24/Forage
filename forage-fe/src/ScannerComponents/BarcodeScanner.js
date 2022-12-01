@@ -11,7 +11,7 @@ function BarcodeScanner() {
     const navigation = useNavigation();
 
     // TODO: Make API key secret
-    const barcodeLookupApiKey = '7jz7t05tyezke5vk93ba92kwhr6ewp';
+    const barcodeLookupApiKey = '0jogs2bufl5s9oibomm51risltztsy';
     const [loading, setLoading] = useState(true);
 
     const [hasPermission, setHasPermission] = useState(null);

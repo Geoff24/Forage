@@ -21,7 +21,6 @@ const RecipeInfoScreen = ( {route} ) => {
         fetch(recipesUrl)
         .then((response) => response.json())
         .then((json) => {
-            console.log(json)
             if(json.length > 0){
                 setRecipeSteps(json[0].steps)
                 setRecipeinfo(json)

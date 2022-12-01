@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler'
 import RecipeItem from '../src/RecipeComponents/RecipeItem'
 import apikey from '../src/apiKey'
-const { distance, closest } = require("fastest-levenshtein");
 import ingredients from "../src/ScannerComponents/ingredientList.json"
 
 

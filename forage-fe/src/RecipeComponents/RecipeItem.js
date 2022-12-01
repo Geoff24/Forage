@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     textDetails: {

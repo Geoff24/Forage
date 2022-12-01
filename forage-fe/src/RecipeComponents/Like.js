@@ -2,30 +2,33 @@ import React, { useState } from 'react'
 import { Pressable } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import axios from 'axios'
+import { combineTransition } from 'react-native-reanimated'
 
 
 function Like({recipe}) {
     const [likeIcon, setLikeIcon] = useState("heart-outline")
     const [likedRecipes, setLikedRecipes] = useState([])
 
-    function onPressLike() {
-        console.log(recipe.id)
+    async function onPressLike() {
+        // console.log(recipe.id)
+        const token = await axios.post("http://localhost:3000/auth/login", {username:"testuser3", password:"password"})
+        const config = {
+            headers: { Authorization: `Bearer ${token.data.access_token}` }
+        }
         if (likeIcon == "heart-outline") {
             setLikeIcon("heart")
-
-            const user = axios.post("http://localhost:3000/users/profile", {username:"testuser3"})
-            const Liked = axios.post("http://localhost:3000/likes/like", {id:user.id})
-            console.log(Liked)
+            
+            const Liked = await axios.post("http://localhost:3000/likes/like", {apiId: recipe.id.toString()}, config)
+            // console.log(Liked.data)
             //Liked.push(recipe.id)
-            axios.post("http://localhost:3000/likes/like", Liked)
+            // axios.post("http://localhost:3000/likes/like", Liked)
             
         }
         else {
             setLikeIcon("heart-outline")
 
-            const Liked = axios.get("http://localhost:3000/likes/unlike", {id:"testuser2"})
-            Liked.push(recipe.id) //filter id instead
-            axios.post("http://localhost:3000/likes/unlike", Liked)
+            const unLiked = await axios.get("http://localhost:3000/likes/unlike", {apiId:recipe.id.toString()}, config)
+            
         }
     }
 
