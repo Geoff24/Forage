@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { Ingredient as IngredientModel } from '@prisma/client';
 import { IngredientsService } from './ingredients.service';
 
@@ -8,7 +8,15 @@ export class IngredientsController {
 
   @Get()
   async getAll(): Promise<IngredientModel[]> {
-    return this.ingredientsService.findAll({});
+    return await this.ingredientsService.findAll({});
+  }
+
+
+  @Get(':id')
+  async getOne(@Param() params): Promise<IngredientModel> {
+    return await this.ingredientsService.findOne({
+      id: params.id,
+    });
   }
 
 
