@@ -8,7 +8,6 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
-    private configService: ConfigService,
     private usersService: UsersService,
     private jwtService: JwtService,
   ) { }
@@ -24,10 +23,8 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { username: user.username, sub: user.id };
-    const secret = this.configService.get<string>('JWT_ACCESS_SECRET')
-    const token = await this.jwtService.signAsync(payload, {secret: secret})
     return {
-      access_token: token
+      access_token: this.jwtService.sign(payload),
     };
   }
 }

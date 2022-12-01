@@ -9,5 +9,5 @@ import { UsersModule } from 'src/users/users.module';
   controllers: [LikesController],
   providers: [LikesService]
 })
-export class LikesModule {}
+export class LikesModule { }
 // vim: ft=typescript ts=2 sw=2 sts=-1 sta et

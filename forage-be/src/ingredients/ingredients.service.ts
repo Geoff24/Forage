@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class IngredientsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: Prisma.IngredientCreateInput) {
     return this.prisma.ingredient.create({
@@ -36,8 +36,8 @@ export class IngredientsService {
   }
 
   async update(params: {
-      where: Prisma.IngredientWhereUniqueInput;
-      data: Prisma.IngredientUpdateInput;
+    where: Prisma.IngredientWhereUniqueInput;
+    data: Prisma.IngredientUpdateInput;
   }): Promise<Ingredient> {
     const { where, data } = params;
     return this.prisma.ingredient.update({
@@ -51,5 +51,6 @@ export class IngredientsService {
       where,
     })
   }
-
 }
+
+// vim: ft=typescript ts=2 sw=2 sts=-1 sta et

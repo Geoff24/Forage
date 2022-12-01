@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class LikesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: Prisma.LikeCreateInput) {
     return this.prisma.like.create({
@@ -13,11 +13,11 @@ export class LikesService {
   }
 
   async findAll(params: {
-      skip?: number;
-      take?: number;
-      cursor?: Prisma.LikeWhereUniqueInput;
-      where?: Prisma.LikeWhereInput;
-      orderBy?: Prisma.LikeOrderByWithRelationInput;
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.LikeWhereUniqueInput;
+    where?: Prisma.LikeWhereInput;
+    orderBy?: Prisma.LikeOrderByWithRelationInput;
   }): Promise<Like[]> {
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.like.findMany({
@@ -30,7 +30,7 @@ export class LikesService {
   }
 
   async findOne(
-      LikeWhereUniqueInput: Prisma.LikeWhereUniqueInput
+    LikeWhereUniqueInput: Prisma.LikeWhereUniqueInput
   ): Promise<Like> {
     return this.prisma.like.findUnique({
       where: LikeWhereUniqueInput,
@@ -38,8 +38,8 @@ export class LikesService {
   }
 
   async update(params: {
-      where: Prisma.LikeWhereUniqueInput;
-      data: Prisma.LikeUpdateInput;
+    where: Prisma.LikeWhereUniqueInput;
+    data: Prisma.LikeUpdateInput;
   }): Promise<Like> {
     const { where, data } = params;
     return this.prisma.like.update({
@@ -49,7 +49,7 @@ export class LikesService {
   }
 
   async remove(
-      where: Prisma.LikeWhereUniqueInput
+    where: Prisma.LikeWhereUniqueInput
   ): Promise<Like> {
     return this.prisma.like.delete({
       where,

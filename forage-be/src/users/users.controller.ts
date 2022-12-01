@@ -8,7 +8,7 @@ const SALT_ROUNDS = 12;
 
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) { }
 
   @Post('signup')
   async signup(
@@ -35,15 +35,12 @@ export class UsersController {
     },
   ): Promise<any> {
     const { username } = userData;
-    const user = await this.usersService.user({ username: username})
+    const user = await this.usersService.user({ username: username })
     return {
       id: user.id,
       email: user.email
     };
   }
-
-
-
 }
 
 // vim: ft=typescript ts=2 sw=2 sts=-1 sta et
