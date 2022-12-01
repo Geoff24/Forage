@@ -1,25 +1,27 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './forage-users/users.module';
-import { JwtService,JwtModule } from '@nestjs/jwt';
-import { secret } from './constants'
-import { UsersService } from './forage-users/users.service';
-import { User, UserSchema } from './forage-users/users.model';
-import { UsersController } from './forage-users/users.controller';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { IngredientsModule } from './ingredients/ingredients.module';
+import { LikesModule } from './likes/likes.module';
 
 @Module({
-  imports: [UserModule,MongooseModule.forRoot(
-    'mongodb+srv://loremipsum:forage123@cluster0.5rodjye.mongodb.net/forage?retryWrites=true&w=majority',
-    
-  ),
-  JwtModule.register({
-    secret,
-    signOptions: {expiresIn: 60}
-  }),
-],
-  controllers: [AppController],
-  providers: [AppService,JwtService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }), 
+    AuthModule,
+    UsersModule,
+    PrismaModule,
+    JwtModule,
+    IngredientsModule,
+    LikesModule,
+  ],
+  controllers: [],
 })
 export class AppModule {}
+
+//vim: ft=typescript ts=2 sw=2 sts=-1 sta et

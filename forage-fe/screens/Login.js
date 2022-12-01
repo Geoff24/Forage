@@ -22,7 +22,7 @@ const LoginScreen = () => {
     const onLoginPressed = async (data) => {
         
         
-        const response = await axios.post("http://localhost:3000/users/login", data)
+        const response = await axios.post("http://localhost:3000/auth/login", data)
         if (response.data.code === 200){
             navigation.navigate("Scanner")
         }

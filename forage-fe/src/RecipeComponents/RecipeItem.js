@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Button, ActivityIndicator, Image, Pressable} from 'react-native';
-import { CheckBox } from 'react-native-elements'
+import { CheckBox } from '@rneui/base';
 import Like from './Like';
 
 
@@ -21,7 +21,7 @@ const RecipeItem = ( {recipe} ) => {
                 </View>
             </View>
             
-            <Like />
+            <Like recipe={recipe}/>
             
             {/* <Text style={styles.recipe_info}>{recipe.likes}</Text> */}
         </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderBottomColor: 'black',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     textDetails: {

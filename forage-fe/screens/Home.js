@@ -37,7 +37,6 @@ const RecipesScreen = () => {
             .then((json) => {
                 setRecipes(json.results)
                 setDataSource(json.results)
-                console.log(recipes)
             })
             .catch((error) => alert(error))
             // const newData = recipes.filter(function (item) {
