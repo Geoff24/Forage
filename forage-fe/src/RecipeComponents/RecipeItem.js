@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Button, ActivityIndicator, Image, Pressable} from 'react-native';
+import { StyleSheet, View, Text, Button, ActivityIndicator, Image, Pressable } from 'react-native';
 import { CheckBox } from '@rneui/base';
 import Like from './Like';
 
 
-const RecipeItem = ( {recipe} ) => {
+const RecipeItem = ({ recipe }) => {
     var calories = Math.floor(Math.random() * 800) + 100;
-    var time = Math.floor(Math.random() * 60) + 1;  
+    var time = Math.floor(Math.random() * 60) + 1;
+    var missingIngredients = recipe.missedIngredientCount
 
     return (
-        <View style={styles.container } >
-            <Image style={styles.recipeImage} source={{uri: recipe.image}}/>
-            <View style={styles.textDetails}> 
+        <View style={styles.container} >
+            <Image style={styles.recipeImage} source={{ uri: recipe.image }} />
+            <View style={styles.textDetails}>
                 <Text style={styles.recipeTitle}>{recipe.title}</Text>
-                <View style = {styles.recipeInfoBox}>
+                <Text style={styles.missingIngredients}>Missing Ingredients: {missingIngredients}</Text>
+                <View style={styles.recipeInfoBox}>
                     {/* <Text style={styles.recipeInfo}>Calories: </Text> */}
                     <Text style={styles.recipeInfoData}>{calories} calories</Text>
                     {/* <Text style={styles.recipeInfo}>Time: </Text> */}
                     <Text style={styles.recipeInfoData}>{time} min</Text>
                 </View>
             </View>
-            
+
             <Like />
-            
+
             {/* <Text style={styles.recipe_info}>{recipe.likes}</Text> */}
         </View>
-        
+
     )
 }
 
@@ -42,9 +44,9 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
 
-    recipeInfo: {        
+    recipeInfo: {
         fontSize: 16,
-        fontWeight:'bold',
+        fontWeight: 'bold',
         color: '#FF894c'
     },
 
@@ -62,8 +64,8 @@ const styles = StyleSheet.create({
     },
 
     recipeInfoBox: {
-        marginTop: '3%',
-        flexDirection:'row'
+        marginTop: '2%',
+        flexDirection: 'row'
     },
 
     recipeInfoData: {
@@ -75,6 +77,9 @@ const styles = StyleSheet.create({
         padding: '1%',
         borderRadius: '5%',
         fontWeight: 'bold',
+    },
+    missingIngredients: {
+
     }
 });
 

@@ -17,7 +17,7 @@ function Like() {
 
     return (
         <Pressable onPress={() => onPressLike()}>
-            <Ionicons name={likeIcon} color={"red"} size="28%"/>
+            <Ionicons name={likeIcon} color={"red"} size="35%" />
         </Pressable>
     )
 }
